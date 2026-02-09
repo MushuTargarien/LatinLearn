@@ -1,11 +1,7 @@
 package com.example.latinlearn
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
-import androidx.activity.ComponentActivity
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import android.view.LayoutInflater
