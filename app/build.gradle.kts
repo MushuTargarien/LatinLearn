@@ -41,9 +41,11 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.viewpager2)
+    implementation(libs.constraintlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation("com.tbuonomo:dotsindicator:4.3")
+    implementation("androidx.cardview:cardview:1.0.0")
 }

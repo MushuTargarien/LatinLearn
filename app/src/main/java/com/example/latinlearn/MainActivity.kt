@@ -17,19 +17,25 @@ class MainActivity : AppCompatActivity() {
     // Данные для страниц
     private val pages = listOf(
         PageData(
-            imageResId = android.R.drawable.ic_menu_gallery,
+            imageResId = R.drawable.bicycle,
             title = "bi-",
-            explanation = "Означает «два».\nПримеры: bicycle, biennial"
+            meaning = "Означает «два»",
+            word = "bicycle",
+            explanation = "bi - «два» + cyclus - круг = велосипед - трансопрт с 2 кругами-колёсами"
         ),
         PageData(
-            imageResId = android.R.drawable.ic_menu_camera,
-            title = "tri-",
-            explanation = "Означает «три».\nПримеры: triangle, tricycle"
+            imageResId = R.drawable.binocular,
+            title = "bi-",
+            meaning = "Означает «два»",
+            word = "binocular",
+            explanation = "bi - «два» + «ocularis »  - глаз = прилагательное, которое означает «относящийся к обоим глазам»"
         ),
         PageData(
-            imageResId = android.R.drawable.ic_media_ff,
-            title = "asd-",
-            explanation = "Означает «asd».\nПримеры: asd, asddsa"
+            imageResId = R.drawable.binocave,
+            title = "bi-",
+            meaning = "Означает «два»",
+            word = "Biconcave ",
+            explanation = "bi - «два» + «concavus» - полый или изогнутый внутрь = форма, которая вогнута с обеих сторон"
         )
     )
 
@@ -37,7 +43,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Находим ViewPager2 по ID
         val viewPager: ViewPager2 = findViewById(R.id.viewPager)
 
         // Устанавливаем адаптер
@@ -49,10 +54,11 @@ class MainActivity : AppCompatActivity() {
 
 
 
-    // Модель данных
     data class PageData(
         val imageResId: Int,
         val title: String,
+        val meaning: String,
+        val word: String,
         val explanation: String
     )
 
@@ -63,6 +69,8 @@ class MainActivity : AppCompatActivity() {
         class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val imageView: ImageView = view.findViewById(R.id.imageView)
             val titleText: TextView = view.findViewById(R.id.textViewTitle)
+            val meaningText: TextView = view.findViewById(R.id.textViewMeaning)
+            val wordText: TextView = view.findViewById(R.id.textViewWord)
             val explanationText: TextView = view.findViewById(R.id.textViewExplanation)
         }
 
@@ -76,6 +84,8 @@ class MainActivity : AppCompatActivity() {
             val page = pages[position]
             holder.imageView.setImageResource(page.imageResId)
             holder.titleText.text = page.title
+            holder.meaningText.text = page.meaning
+            holder.wordText.text = page.word
             holder.explanationText.text = page.explanation
         }
 
