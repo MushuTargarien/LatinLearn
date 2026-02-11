@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.LatinLearn">
+
         <activity
             android:name=".main_menu"
             android:exported="true">
@@ -20,10 +21,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".MainActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false" />
+
+        <activity
+            android:name=".choose"
+            android:exported="false" />
     </application>
 
 </manifest>

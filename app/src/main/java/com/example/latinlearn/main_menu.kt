@@ -19,9 +19,14 @@ class main_menu : AppCompatActivity() {
             insets
         }
         val buttonContinue: Button = findViewById(R.id.btn_continue)
+        val buttonChoose: Button = findViewById(R.id.btn_choose_menu)
 
         buttonContinue.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+        buttonChoose.setOnClickListener {
+            val intent = Intent(this, choose::class.java)
             startActivity(intent)
         }
     }
