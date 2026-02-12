@@ -13,7 +13,7 @@
         android:theme="@style/Theme.LL">
 
         <activity
-            android:name=".Main_menuActivity"
+            android:name=".MainMenuActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

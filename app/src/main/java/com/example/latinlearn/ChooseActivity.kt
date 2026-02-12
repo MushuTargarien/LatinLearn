@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -149,16 +150,22 @@ class ChooseActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val buttonToMainMenu: Button = findViewById(R.id.btn_to_main_menu)
+        buttonToMainMenu.setOnClickListener {
+            val intent = Intent(this, MainMenuActivity::class.java)
+            startActivity(intent)
+        }
+
 
 
         // Настройка Spinner
         val spinner = findViewById<Spinner>(R.id.spinner)
         val adapter = ArrayAdapter(
             this,
-            android.R.layout.simple_spinner_item,
+            R.layout.spinner_item,
             listOf("Приставки", "Суффиксы")
         ).apply {
-            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            setDropDownViewResource(R.layout.spinner_dropdown_item)
         }
         spinner.adapter = adapter
 

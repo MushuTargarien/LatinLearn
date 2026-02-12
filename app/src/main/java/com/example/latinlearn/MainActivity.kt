@@ -1,5 +1,6 @@
 package com.example.latinlearn
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -7,6 +8,7 @@ import androidx.viewpager2.widget.ViewPager2
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
@@ -42,6 +44,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val buttonToMainMenu: Button = findViewById(R.id.btn_to_main_menu)
+        buttonToMainMenu.setOnClickListener {
+            val intent = Intent(this, MainMenuActivity::class.java)
+            startActivity(intent)
+        }
 
         val viewPager: ViewPager2 = findViewById(R.id.viewPager)
         viewPager.adapter = PageAdapter(pages)
