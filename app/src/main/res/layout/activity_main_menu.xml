@@ -6,7 +6,7 @@
     android:background="@color/Background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".main_menu">
+    tools:context=".Main_menuActivity">
 
     <android.widget.Button
         android:id="@+id/btn_continue"
@@ -34,8 +34,7 @@
         android:src="@drawable/gear_ico"
         android:contentDescription="кнопка настроек"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_help" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView3"

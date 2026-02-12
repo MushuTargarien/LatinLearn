@@ -8,16 +8,11 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import android.widget.Button
 
-class main_menu : AppCompatActivity() {
+class Main_menuActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_main_menu)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+
         val buttonContinue: Button = findViewById(R.id.btn_continue)
         val buttonChoose: Button = findViewById(R.id.btn_choose_menu)
 
@@ -26,7 +21,7 @@ class main_menu : AppCompatActivity() {
             startActivity(intent)
         }
         buttonChoose.setOnClickListener {
-            val intent = Intent(this, choose::class.java)
+            val intent = Intent(this, ChooseActivity::class.java)
             startActivity(intent)
         }
     }

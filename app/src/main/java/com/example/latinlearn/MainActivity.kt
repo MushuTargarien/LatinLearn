@@ -44,12 +44,39 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val viewPager: ViewPager2 = findViewById(R.id.viewPager)
-
-        // Устанавливаем адаптер
         viewPager.adapter = PageAdapter(pages)
 
         val dotsIndicator: DotsIndicator = findViewById(R.id.dots_indicator)
         dotsIndicator.attachTo(viewPager)
+
+        // Проверяем, пришли ли данные из AffixSelectorActivity
+        val hasAffixData = intent.hasExtra("AFFIX_TEXT")
+
+        if (hasAffixData) {
+            // Получаем данные
+            val affixText = intent.getStringExtra("AFFIX_TEXT") ?: "bi-"
+            val affixMeaning = intent.getStringExtra("AFFIX_MEANING") ?: "Означает «два»"
+            val affixExample = intent.getStringExtra("AFFIX_EXAMPLE") ?: "bicycle"
+            val affixExplanation = intent.getStringExtra("AFFIX_EXPLANATION") ?: "bi - «два» + cyclus - круг = велосипед"
+
+            // Создаем одиночный элемент
+            val pages = listOf(
+                PageData(
+                    imageResId = R.drawable.bicycle,
+                    title = affixText,
+                    meaning = affixMeaning,
+                    word = affixExample,
+                    explanation = affixExplanation
+                )
+            )
+
+            viewPager.adapter = PageAdapter(pages)
+            dotsIndicator.attachTo(viewPager)
+        } else {
+            // Используем исходные данные (50 карточек)
+            viewPager.adapter = PageAdapter(pages)
+            dotsIndicator.attachTo(viewPager)
+        }
     }
 
 
@@ -63,8 +90,7 @@ class MainActivity : AppCompatActivity() {
     )
 
     // Адаптер для ViewPager2
-    class PageAdapter(private val pages: List<PageData>) :
-        RecyclerView.Adapter<PageAdapter.ViewHolder>() {
+    class PageAdapter(private val pages: List<PageData>) : RecyclerView.Adapter<PageAdapter.ViewHolder>() {
 
         class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val imageView: ImageView = view.findViewById(R.id.imageView)

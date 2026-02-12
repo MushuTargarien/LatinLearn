@@ -10,10 +10,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
-        android:theme="@style/Theme.LatinLearn">
+        android:theme="@style/Theme.LL">
 
         <activity
-            android:name=".main_menu"
+            android:name=".Main_menuActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +27,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".choose"
+            android:name=".ChooseActivity"
             android:exported="false" />
     </application>
 
