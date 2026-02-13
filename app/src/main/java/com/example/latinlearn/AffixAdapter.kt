@@ -1,31 +1,49 @@
 package com.example.latinlearn
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import androidx.recyclerview.widget.RecyclerView
+import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
+import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 
-class AffixAdapter(
-    private val affixes: List<Affix>,
-    private val onItemClick: (Affix) -> Unit
-) : RecyclerView.Adapter<AffixAdapter.ViewHolder>() {
+class AffixFragment : Fragment() {
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val button: Button = view.findViewById(R.id.buttonAffix)
+    private lateinit var affix: Affix
+
+    companion object {
+        fun newInstance(affix: Affix): AffixFragment {
+            val fragment = AffixFragment()
+            fragment.affix = affix
+            return fragment
+        }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_affix_button, parent, false)
-        return ViewHolder(view)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        return inflater.inflate(R.layout.fragment_affix, container, false)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val affix = affixes[position]
-        holder.button.text = affix.text
-        holder.button.setOnClickListener { onItemClick(affix) }
-    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    override fun getItemCount() = affixes.size
+        // Заголовок аффикса
+        val titleText = view.findViewById<android.widget.TextView>(R.id.affixTitle)
+        val meaningText = view.findViewById<android.widget.TextView>(R.id.affixMeaning)
+
+        titleText.text = affix.name
+        meaningText.text = affix.meaning
+
+        // Горизонтальный пейджер для слов
+        val horizontalViewPager: ViewPager2 = view.findViewById(R.id.horizontalViewPager)
+        val horizontalDots: DotsIndicator = view.findViewById(R.id.horizontalDots)
+
+        val adapter = WordCardAdapter(affix.words, requireContext())
+        horizontalViewPager.adapter = adapter
+        horizontalDots.attachTo(horizontalViewPager)
+    }
 }
