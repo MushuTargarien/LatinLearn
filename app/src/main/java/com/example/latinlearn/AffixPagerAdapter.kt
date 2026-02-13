@@ -12,7 +12,6 @@ class AffixPagerAdapter(
     override fun getItemCount() = affixes.size
 
     override fun createFragment(position: Int): Fragment {
-        // Передаём данные аффикса в фрагмент через аргументы
         return AffixFragment.newInstance(affixes[position])
     }
 }

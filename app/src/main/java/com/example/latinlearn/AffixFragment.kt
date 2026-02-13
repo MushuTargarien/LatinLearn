@@ -31,18 +31,18 @@ class AffixFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Заголовок аффикса
-        val titleText = view.findViewById<android.widget.TextView>(R.id.affixTitle)
-        val meaningText = view.findViewById<android.widget.TextView>(R.id.affixMeaning)
-
-        titleText.text = affix.name
-        meaningText.text = affix.meaning
-
         // Горизонтальный пейджер для слов
         val horizontalViewPager: ViewPager2 = view.findViewById(R.id.horizontalViewPager)
         val horizontalDots: DotsIndicator = view.findViewById(R.id.horizontalDots)
 
-        val adapter = WordCardAdapter(affix.words, requireContext())
+        // Передаём название и значение аффикса в адаптер
+        val adapter = WordCardAdapter(
+            affixName = affix.name,
+            affixMeaning = affix.meaning,
+            words = affix.words,
+            context = requireContext()
+        )
+
         horizontalViewPager.adapter = adapter
         horizontalDots.attachTo(horizontalViewPager)
     }

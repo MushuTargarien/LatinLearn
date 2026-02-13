@@ -17,9 +17,6 @@ class MainMenuActivity : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
-        buttonChoose.setOnClickListener {
-            val intent = Intent(this, ChooseActivity::class.java)
-            startActivity(intent)
-        }
+
     }
 }

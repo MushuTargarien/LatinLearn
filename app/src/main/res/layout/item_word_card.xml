@@ -9,12 +9,48 @@
     app:cardElevation="8dp"
     app:strokeWidth="2dp"
     app:strokeColor="#d4a34a"
-    app:cardBackgroundColor="#e6b855">
+    app:cardBackgroundColor="@color/Background">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="24dp">
+
+        <TextView
+            android:id="@+id/affixTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="bi-"
+            android:textColor="#000000"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Значение аффикса -->
+        <TextView
+            android:id="@+id/affixMeaning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Означает «два»"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/affixTitle" />
+
+        <!-- Разделитель -->
+        <View
+            android:id="@+id/divider"
+            android:layout_width="wrap_content"
+            android:layout_height="2dp"
+            android:background="#d4a34a"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/affixMeaning"
+            android:layout_marginTop="12dp" />
 
         <ImageView
             android:id="@+id/imageView"
@@ -26,14 +62,16 @@
             android:src="@android:drawable/ic_menu_gallery"
             app:layout_constraintBottom_toTopOf="@id/textViewWord"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.5"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintHeight_percent="0.5" />
+            app:layout_constraintTop_toBottomOf="@+id/divider" />
 
         <TextView
             android:id="@+id/textViewWord"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="bicycle"
             android:textColor="#000000"
             android:textSize="28sp"

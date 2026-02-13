@@ -3,58 +3,30 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#ffd391">
+    android:layout_height="match_parent">
 
-    <!-- Заголовок аффикса -->
-    <TextView
-        android:id="@+id/affixTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="bi-"
-        android:textColor="#000000"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="24dp" />
 
-    <!-- Значение аффикса -->
-    <TextView
-        android:id="@+id/affixMeaning"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Означает «два»"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/affixTitle"
-        android:layout_marginTop="8dp" />
-
-    <!-- Горизонтальный пейджер для слов -->
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/horizontalViewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="16dp"
-        app:layout_constraintTop_toBottomOf="@id/affixMeaning"
         app:layout_constraintBottom_toTopOf="@id/horizontalDots"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Индикаторы для слов -->
     <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
         android:id="@+id/horizontalDots"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:dotsColor="#d4a34a"
+        app:dotsColor="#76777D"
         app:dotsCornerRadius="4dp"
         app:dotsSize="8dp"
         app:dotsSpacing="4dp"
         app:dotsWidthFactor="2.5"
-        app:selectedDotColor="#e6b855"
+        app:selectedDotColor="#4D87C7"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
