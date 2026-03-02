@@ -2,14 +2,18 @@ package com.example.latinlearn
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import android.widget.Button
-
+import android.widget.Toast
 
 
 class MainActivity : AppCompatActivity() {
 
+
+    private lateinit var dbHelper: DBHelper
+    /*
     private val affixes = listOf(
         Affix(
             name = "bi-",
@@ -86,9 +90,13 @@ class MainActivity : AppCompatActivity() {
         )
     )
 
+
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
 
         val buttonToMainMenu: Button = findViewById(R.id.btn_to_main_menu)
         buttonToMainMenu.setOnClickListener {
@@ -98,14 +106,12 @@ class MainActivity : AppCompatActivity() {
 
         val viewPager: ViewPager2 = findViewById(R.id.verticalViewPager)
 
-        val adapter = AffixPagerAdapter(this, affixes)
-        viewPager.adapter = adapter
-
-
+     //   val adapter = AffixPagerAdapter(this, affixes)
+      //  viewPager.adapter = adapter
     }
 
-
-
-
-
+    override fun onDestroy() {
+        super.onDestroy()
+        dbHelper.close()
+    }
 }

@@ -17,7 +17,9 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
+        buildFeatures{
+            viewBinding = true;
+        }
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -49,3 +51,4 @@ dependencies {
     implementation("com.tbuonomo:dotsindicator:4.3")
     implementation("androidx.cardview:cardview:1.0.0")
 }
+
