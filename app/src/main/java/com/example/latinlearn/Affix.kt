@@ -1,15 +1,20 @@
 package com.example.latinlearn
 
+import java.time.zone.ZoneOffsetTransitionRule
+
 data class Affix(
-    val name: String,
-    val meaning: String,
+    val id: Int,
     val type: String,
-    val words: List<Word>
+    val affix: String,
+    val meaning: String,
+    val examples: List<ExampleModel>
 )
-
-
-data class Word(
-    val imageResId: Int,
+data class ExampleModel(
+    val id: Int,
     val word: String,
-    val explanation: String
+    val definition: String,
+    val explanation: String,
+    val image: String
 )
+
+

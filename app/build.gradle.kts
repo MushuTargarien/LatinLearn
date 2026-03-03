@@ -48,6 +48,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    implementation("io.coil-kt:coil:2.6.0")
     implementation("com.tbuonomo:dotsindicator:4.3")
     implementation("androidx.cardview:cardview:1.0.0")
 }

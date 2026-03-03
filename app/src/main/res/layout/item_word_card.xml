@@ -16,6 +16,7 @@
         android:layout_height="match_parent"
         android:padding="24dp">
 
+        <!-- Сам аффикс -->
         <TextView
             android:id="@+id/affixTitle"
             android:layout_width="wrap_content"
@@ -52,21 +53,24 @@
             app:layout_constraintTop_toBottomOf="@id/affixMeaning"
             android:layout_marginTop="12dp" />
 
+        <!-- картинка-->
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="24dp"
             android:contentDescription="Иллюстрация слова"
-            android:src="@android:drawable/ic_menu_gallery"
+            android:src="@drawable/error_image"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
             app:layout_constraintBottom_toTopOf="@id/textViewWord"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_percent="0.5"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider" />
 
+        <!--  слово пример с аффиксом -->
         <TextView
             android:id="@+id/textViewWord"
             android:layout_width="wrap_content"
@@ -80,6 +84,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/imageView" />
 
+        <!-- объяснение как образовалось слово -->
         <TextView
             android:id="@+id/textViewExplanation"
             android:layout_width="wrap_content"

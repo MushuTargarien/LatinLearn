@@ -3,100 +3,24 @@ package com.example.latinlearn
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
+import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 
 
 class MainActivity : AppCompatActivity() {
 
-
     private lateinit var dbHelper: DBHelper
-    /*
-    private val affixes = listOf(
-        Affix(
-            name = "bi-",
-            meaning = "Означает «два»",
-            type = "prefix",
-            words = listOf(
-                Word(
-                    imageResId = R.drawable.bicycle,
-                    word = "bicycle",
-                    explanation = "bi (два) + cyclus (круг) = велосипед"
-                ),
-                Word(
-                    imageResId = R.drawable.binocular,
-                    word = "binocular",
-                    explanation = "bi (два) + ennial (год) = двухлетний"
-                ),
-                Word(
-                    imageResId = R.drawable.bicycle,
-                    word = "binocave",
-                    explanation = "bi (два) + furca (вилка) = двухвогнутая"
-                )
-            )
-        ),
-        Affix(
-            name = "tri-",
-            meaning = "Означает «три»",
-            type = "prefix",
-            words = listOf(
-                Word(
-                    imageResId = R.drawable.binocular,
-                    word = "triangle",
-                    explanation = "tri (три) + angle (угол) = треугольник"
-                ),
-                Word(
-                    imageResId = R.drawable.binocular,
-                    word = "tricycle",
-                    explanation = "tri (три) + cycle (колесо) = трёхколёсный велосипед"
-                )
-            )
-        ),
-        Affix(
-            name = "uni-",
-            meaning = "Означает «один»",
-            type = "prefix",
-            words = listOf(
-                Word(
-                    imageResId = R.drawable.bicycle,
-                    word = "unicorn",
-                    explanation = "uni (один) + cornu (рог) = единорог"
-                ),
-                Word(
-                    imageResId = R.drawable.bicycle,
-                    word = "unicycle",
-                    explanation = "uni (один) + cycle (колесо) = одноколёсный велосипед"
-                )
-            )
-        ),
-        Affix(
-            name = "-able",
-            meaning = "Означает «способность»",
-            type = "suffix",
-            words = listOf(
-                Word(
-                    imageResId = R.drawable.binocave,
-                    word = "readable",
-                    explanation = "read (читать) + able (способный) = читаемый"
-                ),
-                Word(
-                    imageResId = R.drawable.binocave,
-                    word = "comfortable",
-                    explanation = "comfort (комфорт) + able (способный) = комфортный"
-                )
-            )
-        )
-    )
+    private lateinit var counterTextView: TextView
+    private lateinit var repository: AffixRepository
 
-
-     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
 
         val buttonToMainMenu: Button = findViewById(R.id.btn_to_main_menu)
         buttonToMainMenu.setOnClickListener {
@@ -105,9 +29,22 @@ class MainActivity : AppCompatActivity() {
         }
 
         val viewPager: ViewPager2 = findViewById(R.id.verticalViewPager)
+        counterTextView = findViewById(R.id.TVnumberOfExample)
 
-     //   val adapter = AffixPagerAdapter(this, affixes)
-      //  viewPager.adapter = adapter
+
+        repository = AffixRepository(this)
+        val adapter = AffixPagerAdapter.create(this,this)
+        viewPager.adapter = adapter
+
+        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+            override fun onPageSelected(position: Int) {
+               updateCounterText(position, adapter.itemCount)
+            }
+        })
+    }
+
+     fun updateCounterText(position: Int, total: Int){
+         counterTextView.text = "${position+ 1 }/$total"
     }
 
     override fun onDestroy() {

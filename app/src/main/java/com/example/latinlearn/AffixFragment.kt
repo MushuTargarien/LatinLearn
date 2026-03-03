@@ -12,6 +12,7 @@ class AffixFragment : Fragment() {
 
     private lateinit var affix: Affix
 
+
     companion object {
         fun newInstance(affix: Affix): AffixFragment {
             val fragment = AffixFragment()
@@ -31,19 +32,11 @@ class AffixFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Горизонтальный пейджер для слов
-        val horizontalViewPager: ViewPager2 = view.findViewById(R.id.horizontalViewPager)
+        val viewPager: ViewPager2 = view.findViewById(R.id.horizontalViewPager)
         val horizontalDots: DotsIndicator = view.findViewById(R.id.horizontalDots)
 
-        // Передаём название и значение аффикса в адаптер
-        val adapter = WordCardAdapter(
-            affixName = affix.name,
-            affixMeaning = affix.meaning,
-            words = affix.words,
-            context = requireContext()
-        )
-
-        horizontalViewPager.adapter = adapter
-        horizontalDots.attachTo(horizontalViewPager)
+        val adapter = WordCardAdapter(affix.examples, requireContext(), affix.affix, affix.meaning)
+        viewPager.adapter = adapter
+        horizontalDots.attachTo(viewPager)
     }
 }
