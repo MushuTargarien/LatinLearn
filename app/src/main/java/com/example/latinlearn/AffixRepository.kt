@@ -6,9 +6,12 @@ import com.example.latinlearn.DBHelper
 import com.example.latinlearn.Affix
 import com.example.latinlearn.ExampleModel
 
+/*
+*   для перевода данных из БД в удобный вид дял работы в будущем
+ */
 class AffixRepository(private val context: Context) {
 
-    private val dbManager by lazy { DBManager(context) }
+    private val dbManager by lazy { DBManager(context) }        // lazy - инициализируется только пр ипервом обращении
 
     fun getAllAffixes(): List<Affix>{
         val affixes = mutableListOf<Affix>()
@@ -49,5 +52,6 @@ class AffixRepository(private val context: Context) {
 
     fun close(){
         dbManager.close()
+
     }
 }

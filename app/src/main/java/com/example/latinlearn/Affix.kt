@@ -1,7 +1,4 @@
 package com.example.latinlearn
-
-import java.time.zone.ZoneOffsetTransitionRule
-
 data class Affix(
     val id: Int,
     val type: String,

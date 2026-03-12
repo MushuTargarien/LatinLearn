@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.size.Scale
 import coil.util.CoilUtils.result
-
+/*
+* Преобразование сырых данных из БД в визуальные карточки
+ */
 class WordCardAdapter(
     private val examples: List<ExampleModel>,
     private val context: Context,
@@ -39,7 +41,7 @@ class WordCardAdapter(
         holder.affixTitleText.text = affixTitle
         holder.affixMeaningText.text = affixMeaning
         holder.imageView.load(example.image){
-            placeholder(android.R.drawable.progress_horizontal)
+            placeholder(R.drawable.load)
             error(R.drawable.error_image)
             crossfade(true)
             scale(Scale.FIT)
@@ -51,24 +53,6 @@ class WordCardAdapter(
                 }
             )
         }
-
-            /*
-        try{
-            val resourceId = context.resources.getIdentifier(
-                example.image.replace(".png",""),
-                "drawable",
-                context.packageName
-            )
-            if(resourceId != 0){
-                holder.imageView.setImageResource(resourceId)
-            } else{
-                holder.imageView.setImageResource(R.drawable.bicycle)
-            }
-        }catch(e: Exception){
-            holder.imageView.setImageResource(R.drawable.bicycle)
-        }
-
-             */
     }
 
     override fun getItemCount() = examples.size

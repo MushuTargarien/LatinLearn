@@ -7,6 +7,10 @@ import android.database.sqlite.SQLiteDatabase
 import java.time.zone.ZoneOffsetTransitionRule
 import kotlin.math.exp
 
+/*
+*   класс с запросами в БД
+*/
+
 class DBManager(context: Context) {
     private val dbHelper = DBHelper(context)
     private val database: SQLiteDatabase = dbHelper.writableDatabase

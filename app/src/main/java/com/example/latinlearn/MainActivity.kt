@@ -11,7 +11,9 @@ import android.widget.TextView
 import android.widget.Toast
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 
-
+/*
+* Основное активити с карточками
+ */
 class MainActivity : AppCompatActivity() {
 
     private lateinit var dbHelper: DBHelper
@@ -50,5 +52,6 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         dbHelper.close()
+        repository.close()
     }
 }

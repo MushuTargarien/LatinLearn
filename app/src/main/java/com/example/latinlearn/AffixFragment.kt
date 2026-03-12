@@ -8,6 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 
+/*
+*   Фрагмент который отвечает за горизонтальную навигацию для отдельного аффикса
+*   создаёт адаптер( со всеми данными одного аффикса и его примерами, и привязывает этот адаптер к горизонтальному пейджеру)
+*/
+
 class AffixFragment : Fragment() {
 
     private lateinit var affix: Affix
