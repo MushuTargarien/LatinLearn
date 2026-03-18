@@ -27,6 +27,12 @@ class MainMenuActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val btnAllTerms: Button = findViewById(R.id.btn_choose_menu)
+        btnAllTerms.setOnClickListener {
+            val intent = Intent(this, ChooseMenuActivity::class.java)
+            startActivity(intent)
+        }
+
 
     }
 
