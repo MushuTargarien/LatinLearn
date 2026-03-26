@@ -15,6 +15,9 @@
         android:theme="@style/Theme.LL"
         android:usesCleartextTraffic="false">
         <activity
+            android:name=".TermDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".ChooseMenuActivity"
             android:exported="false" />
         <activity

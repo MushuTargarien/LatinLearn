@@ -19,11 +19,11 @@ class MainMenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_menu)
 
-        dbManager = DBManager(this) // инициализация БД
+        dbManager = DBManager(this)
 
         val buttonContinue: Button = findViewById(R.id.btn_continue)
         buttonContinue.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, TermDetailActivity::class.java)
             startActivity(intent)
         }
 
