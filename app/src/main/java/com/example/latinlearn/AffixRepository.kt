@@ -1,17 +1,13 @@
 package com.example.latinlearn
 
 import android.content.Context
-import com.example.latinlearn.DBManager
-import com.example.latinlearn.DBHelper
-import com.example.latinlearn.Affix
-import com.example.latinlearn.ExampleModel
 
 /*
 *   для перевода данных из БД в удобный вид дял работы в будущем
  */
 class AffixRepository(private val context: Context) {
-
-    private val dbManager by lazy { DBManager(context) }        // lazy - инициализируется только пр ипервом обращении
+/*
+    private val dbManager by lazy { DBManager(context) }        // lazy - инициализируется только при первом обращении
 
     fun getAllAffixes(): List<Affix>{
         val affixes = mutableListOf<Affix>()
@@ -23,7 +19,7 @@ class AffixRepository(private val context: Context) {
                 val type = affixCursor.getString(affixCursor.getColumnIndexOrThrow("type"))
                 val affix = affixCursor.getString(affixCursor.getColumnIndexOrThrow("affix"))
                 val meaning = affixCursor.getString(affixCursor.getColumnIndexOrThrow("meaning"))
-                val examples = getExamplesbyAffixId(id)
+                val examples = getExamplesByAffixId(id)
 
                 affixes.add(Affix(id,type, affix, meaning,examples))
             } while(affixCursor.moveToNext())
@@ -32,7 +28,7 @@ class AffixRepository(private val context: Context) {
         return affixes
     }
 
-    private fun getExamplesbyAffixId(affixId: Int): List<ExampleModel> {
+    private fun getExamplesByAffixId(affixId: Int): List<ExampleModel> {
         val examples = mutableListOf<ExampleModel>()
         val exampleCursor = dbManager.getExamplesByAffixId(affixId)
         if(exampleCursor.moveToFirst()){
@@ -54,4 +50,6 @@ class AffixRepository(private val context: Context) {
         dbManager.close()
 
     }
+
+ */
 }

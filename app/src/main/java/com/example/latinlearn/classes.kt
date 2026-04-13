@@ -17,6 +17,7 @@ data class ExampleModel(
 data class MathTerm(
     val id: Int,
     val term: String,
+    val translate: String,
     val definition: String
 )
 

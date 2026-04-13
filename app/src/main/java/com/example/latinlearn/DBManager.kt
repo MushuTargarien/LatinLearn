@@ -15,90 +15,80 @@ class DBManager(context: Context) {
     private val dbHelper = DBHelper(context)
     private val database: SQLiteDatabase = dbHelper.writableDatabase
 
-    // AFFIXES
-    fun addAffix(type: String, affix: String, meaning: String): Long{
-        val values = ContentValues().apply {
-            put(DBHelper.COL_TYPE, type)
-            put(DBHelper.COL_AFFIX, affix)
-            put(DBHelper.COL_MEANING, meaning)
-        }
-        return database.insert(DBHelper.TABLE_AFFIXES,null,values)
+
+
+    fun getAnalogiesForTerm(termId: Int): Cursor{
+        return database.rawQuery("""
+            SELECT
+                mt.id as termId,
+                mt.term as term,
+                mt.translate as termTranslate,
+                mt.definition as definition,
+                a.word as analogyWord,
+                a.translate as analogyTranslate,
+                a.definition as analogyDefinition,
+                a.image_url as imageUrl,
+                lt.name as typeOfConnection,
+                tal.explanation as explanationConnection
+            FROM math_terms mt
+            INNER JOIN term_analogy_links tal ON mt.id = tal.term_id
+            INNER JOIN analogies a ON tal.analogy_id = a.id
+            INNER JOIN link_types lt ON tal.link_type_id = lt.id
+            WHERE mt.id = ?
+            ORDER BY tal.id ASC
+        """.trimIndent(), arrayOf(termId.toString()))
     }
 
-    fun getAllAffixes(): Cursor{
+    fun getMathTermById(termId: Int):Cursor{
         return database.query(
-            DBHelper.TABLE_AFFIXES,
+            DBHelper.TABLE_MATH_TERMS,
             null,
-            null,
-            null,
-            null,
-            null,
-            "${DBHelper.COL_ID_AFFIX} ASC"
-        )
-    }
-
-    fun getAffixesByType(type: String): Cursor{
-        return  database.query(
-            DBHelper.TABLE_AFFIXES,
-            null,
-            "${DBHelper.COL_TYPE}=?",
-            arrayOf(type),
+            "${DBHelper.COL_ID_MATH_TERM} = ?",
+            arrayOf(termId.toString()),
             null,
             null,
             null
         )
     }
 
-
-    //DOMAINS
-    fun addDomain(title: String): Long{
-        val values = ContentValues().apply {
-            put(DBHelper.COL_TITLE, title)
-        }
-        return database.insert(DBHelper.TABLE_DOMAINS,null,values)
+    fun getAllMathTerms(): Cursor{
+        return database.query(
+            DBHelper.TABLE_MATH_TERMS,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "${DBHelper.COL_ID_MATH_TERM} ASC"
+        )
     }
 
-    fun getAllDomains(): Cursor{
+    fun getLinkTypeById(linkTypeId: Int): Cursor {
         return database.query(
-            DBHelper.TABLE_DOMAINS,
+            DBHelper.TABLE_LINK_TYPES,
             null,
-            null,
-            null,
+            "${DBHelper.COL_ID_LINK_TYPE} = ?",
+            arrayOf(linkTypeId.toString()),
             null,
             null,
             null
         )
     }
 
-
-    //EXAMPLES
-    fun addExample(affixID: Int, domainID: Int, word: String, definition: String, explanation: String, image: String): Long{
-        val values = ContentValues().apply {
-            put(DBHelper.COL_ID_AFFIX_FK, affixID)
-            put(DBHelper.COL_ID_DOMAIN_FK, domainID)
-            put(DBHelper.COL_WORD, word)
-            put(DBHelper.COL_DEFINITION, definition)
-            put(DBHelper.COL_EXPLANATION, explanation)
-            put(DBHelper.COL_IMAGE, image)
-        }
-        return database.insert(DBHelper.TABLE_EXAMPLES,null,values)
-    }
-
-    fun getExamplesByAffixId(affixId: Int): Cursor{
+    fun getAllLinkTypes(): Cursor{
         return database.query(
-            DBHelper.TABLE_EXAMPLES,
-            null,
-            "${DBHelper.COL_ID_AFFIX_FK}=?",
-            arrayOf(affixId.toString()),
+            DBHelper.TABLE_LINK_TYPES,
             null,
             null,
-            null
+            null,
+            null,
+            null,
+            "${DBHelper.COL_ID_LINK_TYPE} ASC"
         )
     }
 
 
     // USERS
-
     fun authenticate(login: String,pass: String): Cursor{
         return database.query(
             DBHelper.TABLE_USERS,

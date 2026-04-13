@@ -9,7 +9,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 *    загружает данные из БД при создании
 *   создаёт фрагменты по мере листания
 *   Оптимизирует память при помощи FragmentStateAdapter (создаёт\уничтожает элементы при листании)
- */
+*/
 class AffixPagerAdapter(
     activity: FragmentActivity,
     private val affixes: List<Affix>
@@ -20,6 +20,7 @@ class AffixPagerAdapter(
     override fun createFragment(position: Int): Fragment {
         return AffixFragment.newInstance(affixes[position])
     }
+    /*
     companion object{
         fun create(activity: FragmentActivity, context: Context): AffixPagerAdapter{
             val repository = AffixRepository(context)
@@ -28,4 +29,6 @@ class AffixPagerAdapter(
             return AffixPagerAdapter(activity, affixes)
         }
     }
+
+     */
 }

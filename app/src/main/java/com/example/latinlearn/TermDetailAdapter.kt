@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import coil.load
-import coil.size.Scale
 
 
 
@@ -35,10 +34,8 @@ class TermDetailAdapter (
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val analogy = analogies[position]
-   //     val termWithTranslate = "${termWithAnalogy.term} - ${termWithAnalogy.termTranslate}"
         val analogyWithTranslate = "${analogy.analogyWord} - ${analogy.analogyTranslate}"
-    //    holder.termText.text = termWithTranslate
-    //    holder.definitionText.text = termWithAnalogy.definition
+
         holder.analogyWordText.text = analogyWithTranslate
         holder.analogyDefinitionText.text = analogy.analogyDefinition
         holder.typeOfConnectionText.text = analogy.typeOfConnection

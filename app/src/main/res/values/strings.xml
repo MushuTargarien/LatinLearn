@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">LatinLearn</string>
     <string name="text_in_menu">Latin\nLearn</string>
+    <string name="term_title">%1$s - %2$s</string>
 </resources>

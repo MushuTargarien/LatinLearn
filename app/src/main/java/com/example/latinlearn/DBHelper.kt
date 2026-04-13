@@ -13,27 +13,6 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
 
 
     companion object{
-        //таблица аффиксов
-        const val TABLE_AFFIXES = "affixes"
-        const val COL_ID_AFFIX = "affixID"
-        const val COL_TYPE = "type"
-        const val COL_AFFIX = "affix"
-        const val COL_MEANING = "meaning"
-
-        //таблица областей
-        const val TABLE_DOMAINS = "domains"
-        const val COL_ID_DOMAIN = "domainID"
-        const val COL_TITLE = "title"
-
-        //таблица примеров
-        const val TABLE_EXAMPLES = "examples"
-        const val COL_ID_EXAMPLE = "exampleID"
-        const val COL_ID_AFFIX_FK = "affixID"
-        const val COL_ID_DOMAIN_FK = "domainID"
-        const val COL_WORD = "word"
-        const val COL_DEFINITION = "definition"
-        const val COL_EXPLANATION = "explanation"
-        const val COL_IMAGE = "image"
 
         //таблица пользователей
         const val TABLE_USERS = "users"
@@ -43,7 +22,40 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
         const val COL_ROLE = "role"
 
 
-        const val DATABASE_NAME = "latin_learn"
+        const val TABLE_MATH_TERMS = "math_terms"
+        const val COL_ID_MATH_TERM = "id"
+        const val COL_TERM = "term"
+        const val COL_TERM_TRANSLATE = "translate"
+        const val COL_TERM_DEFINITION = "definition"
+
+        const val TABLE_ANALOGIES = "analogies"
+        const val COL_ID_ANALOGY = "id"
+        const val COL_ANALOGY_WORD = "word"
+        const val COL_ANALOGY_TRANSLATE = "translate"
+        const val COL_ANALOGY_DEFINITION = "definition"
+        const val COL_ANALOGY_MORPHEME_ID_FK = "morpheme_id"
+        const val COL_ANALOGY_EXPLANATION = "explanation"
+        const val  COL_ANALOGY_IMAGE_URL = "image_url"
+
+        const val TABLE_LINK_TYPES = "link_types"
+        const val COL_ID_LINK_TYPE = "id"
+        const val COL_ID_LINK_NAME = "name"
+
+
+        const val TABLE_MORPHEMES = "morphemes"
+        const val COL_ID_MORPHEME = "id"
+        const val COL_MORPHEME_FORM = "form"
+        const val COL_MORPHEME_TYPE = "type"
+        const val COL_MORPHEME_MEANING = "meaning"
+
+        const val TABLE_MORPHEME_MATH_TERM = "morpheme_math_term"
+        const val COL_MORPHEME_ID_FK = "morpheme_id"
+        const val COL_MATH_TERM_ID_FK = "math_term_id"
+        const val COL_MORPHEME_MATH_TERM_EXPLANATION = "explanation"
+
+
+
+        const val DATABASE_NAME = "latin_learn2"
         const val DATABASE_VERSION = 1
         private const val DB_PATH_SUFFIX = "/databases/"
         private var instance: DBHelper? = null

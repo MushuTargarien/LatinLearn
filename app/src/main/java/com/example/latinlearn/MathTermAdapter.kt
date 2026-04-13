@@ -1,6 +1,6 @@
 package com.example.latinlearn
 
-import android.content.Intent
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 
 class MathTermAdapter(
     private val terms: List<MathTerm>,
-    private val activity: ChooseMenuActivity  // Передаём активити напрямую
+    private val onTermClick: (MathTerm) ->Unit
 ) : RecyclerView.Adapter<MathTermAdapter.ViewHolder>() {
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val termBtn: Button = view.findViewById(R.id.termText)
     }
 
@@ -28,13 +28,7 @@ class MathTermAdapter(
         holder.termBtn.text = term.term
 
         holder.termBtn.setOnClickListener {
-            android.util.Log.d("CLICK", "Клик на: ${term.term}")
-
-            val intent = Intent(activity, MainActivity::class.java)
-
-            activity.startActivity(intent)
-
-            activity.finish()
+            onTermClick(term)
         }
     }
 

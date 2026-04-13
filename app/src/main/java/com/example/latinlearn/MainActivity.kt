@@ -15,7 +15,7 @@ import com.tbuonomo.viewpagerdotsindicator.DotsIndicator
 * Основное активити с карточками
  */
 class MainActivity : AppCompatActivity() {
-
+/*
     private lateinit var dbHelper: DBHelper
     private lateinit var counterTextView: TextView
     private lateinit var repository: AffixRepository
@@ -54,4 +54,6 @@ class MainActivity : AppCompatActivity() {
         dbHelper.close()
         repository.close()
     }
+
+ */
 }
