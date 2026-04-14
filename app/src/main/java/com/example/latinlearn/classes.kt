@@ -21,13 +21,6 @@ data class MathTerm(
     val definition: String
 )
 
-data class Analogy(
-    val id: Int,
-    val word: String,
-    val translate: String,
-    val explanation: String,
-    val image_url: String
-)
 
 data class TermWithAnalogy (
     val termId: Int,

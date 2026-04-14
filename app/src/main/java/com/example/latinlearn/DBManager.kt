@@ -31,12 +31,12 @@ class DBManager(context: Context) {
                 lt.name as typeOfConnection,
                 tal.explanation as explanationConnection
             FROM math_terms mt
-            INNER JOIN term_analogy_links tal ON mt.id = tal.term_id
-            INNER JOIN analogies a ON tal.analogy_id = a.id
-            INNER JOIN link_types lt ON tal.link_type_id = lt.id
+            INNER JOIN morpheme_math_term mmt ON mt.id = mmt.math_term_id
+            INNER JOIN morphemes m ON mmt.morpheme_id = m.id
+            INNER JOIN analogies a ON m.id = a.morpheme_id 
             WHERE mt.id = ?
             ORDER BY tal.id ASC
-        """.trimIndent(), arrayOf(termId.toString()))
+        """, arrayOf(termId.toString()))
     }
 
     fun getMathTermById(termId: Int):Cursor{
