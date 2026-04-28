@@ -28,14 +28,16 @@ class DBManager(context: Context) {
                 a.translate as analogyTranslate,
                 a.definition as analogyDefinition,
                 a.image_url as imageUrl,
-                lt.name as typeOfConnection,
-                tal.explanation as explanationConnection
+                m.form as morphemeForm,
+                m.type as morphemeType,
+                m.meaning as morphemeMeaning,
+                mmt.explanation as morphemeExplanation
             FROM math_terms mt
             INNER JOIN morpheme_math_term mmt ON mt.id = mmt.math_term_id
             INNER JOIN morphemes m ON mmt.morpheme_id = m.id
             INNER JOIN analogies a ON m.id = a.morpheme_id 
             WHERE mt.id = ?
-            ORDER BY tal.id ASC
+            ORDER BY a.id ASC
         """, arrayOf(termId.toString()))
     }
 
@@ -88,7 +90,6 @@ class DBManager(context: Context) {
     }
 
 
-    // USERS
     fun authenticate(login: String,pass: String): Cursor{
         return database.query(
             DBHelper.TABLE_USERS,

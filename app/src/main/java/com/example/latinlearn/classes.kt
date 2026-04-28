@@ -30,7 +30,9 @@ data class TermWithAnalogy (
     val analogyWord: String,
     val analogyTranslate: String,
     val analogyDefinition: String,
-    val typeOfConnection: String,
-    val explanationConnection: String,
+    val morphemeForm: String,
+    val morphemeType: String,
+    val morphemeMeaning: String,
+    val morphemeExplanation: String,
     val imageUrl: String
 )

@@ -19,9 +19,11 @@ class TermWithAnalogyRepository(private val context: Context){
                     analogyWord = cursor.getString(cursor.getColumnIndexOrThrow("analogyWord")),
                     analogyTranslate = cursor.getString(cursor.getColumnIndexOrThrow("analogyTranslate")),
                     analogyDefinition = cursor.getString(cursor.getColumnIndexOrThrow("analogyDefinition")),
-                    typeOfConnection = cursor.getString(cursor.getColumnIndexOrThrow("typeOfConnection")),
-                    explanationConnection = cursor.getString(cursor.getColumnIndexOrThrow("explanationConnection")),
-                    imageUrl = cursor.getString(cursor.getColumnIndexOrThrow("imageUrl")) ?: ""
+                    imageUrl = cursor.getString(cursor.getColumnIndexOrThrow("imageUrl")) ?: "",
+                    morphemeForm = cursor.getString(cursor.getColumnIndexOrThrow("morphemeForm")),
+                    morphemeType = cursor.getString(cursor.getColumnIndexOrThrow("morphemeType")),
+                    morphemeMeaning = cursor.getString(cursor.getColumnIndexOrThrow("morphemeMeaning")),
+                    morphemeExplanation = cursor.getString(cursor.getColumnIndexOrThrow("morphemeExplanation"))
                 )
                 analogies.add(termWithAnalogy)
             } while (cursor.moveToNext())

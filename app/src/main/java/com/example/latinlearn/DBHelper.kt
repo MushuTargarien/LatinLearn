@@ -55,8 +55,8 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
 
 
 
-        const val DATABASE_NAME = "latin_learn2"
-        const val DATABASE_VERSION = 1
+        const val DATABASE_NAME = "latin_learn3"
+        const val DATABASE_VERSION = 2
         private const val DB_PATH_SUFFIX = "/databases/"
         private var instance: DBHelper? = null
 

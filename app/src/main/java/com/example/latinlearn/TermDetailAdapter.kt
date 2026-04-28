@@ -22,8 +22,8 @@ class TermDetailAdapter (
         val analogyWordText: TextView = view.findViewById(R.id.analogyWordText)
         val imageView: ImageView = view.findViewById(R.id.imageView)
         val analogyDefinitionText: TextView = view.findViewById(R.id.analogyDefinitionText)
-        val typeOfConnectionText: TextView = view.findViewById(R.id.typeOfConnectionText)
-        val explanationConnectionText: TextView = view.findViewById(R.id.explanationConnectionText)
+        val morphemeFormText: TextView = view.findViewById(R.id.morphemeFormText)
+        val morphemeMeaningText: TextView = view.findViewById(R.id.morphemeMeaningText)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -37,9 +37,10 @@ class TermDetailAdapter (
         val analogyWithTranslate = "${analogy.analogyWord} - ${analogy.analogyTranslate}"
 
         holder.analogyWordText.text = analogyWithTranslate
+        holder.morphemeFormText.text = analogy.morphemeForm
+        holder.morphemeMeaningText.text = "означает ${analogy.morphemeForm}"
         holder.analogyDefinitionText.text = analogy.analogyDefinition
-        holder.typeOfConnectionText.text = analogy.typeOfConnection
-        holder.explanationConnectionText.text = analogy.explanationConnection
+
 
         holder.imageView.load(analogy.imageUrl) {
             placeholder(R.drawable.load)
