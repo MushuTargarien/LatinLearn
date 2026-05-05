@@ -36,3 +36,17 @@ data class TermWithAnalogy (
     val morphemeExplanation: String,
     val imageUrl: String
 )
+
+
+data class MathTermWithAnalogies(
+    val termId: Int,
+    val term: String,
+    val translate: String,
+    val analogies: List<AnalogyItem> = emptyList(),
+    val isExpanded: Boolean = false
+)
+
+data class AnalogyItem(
+    val word: String,
+    val translate: String
+)

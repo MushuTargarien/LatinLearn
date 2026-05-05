@@ -38,7 +38,7 @@ class TermDetailAdapter (
 
         holder.analogyWordText.text = analogyWithTranslate
         holder.morphemeFormText.text = analogy.morphemeForm
-        holder.morphemeMeaningText.text = "означает ${analogy.morphemeForm}"
+        holder.morphemeMeaningText.text = "означает ${analogy.morphemeMeaning}"
         holder.analogyDefinitionText.text = analogy.analogyDefinition
 
 

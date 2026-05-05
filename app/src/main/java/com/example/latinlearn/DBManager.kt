@@ -41,6 +41,19 @@ class DBManager(context: Context) {
         """, arrayOf(termId.toString()))
     }
 
+    fun getAnalogiesForList(termId: Int): Cursor{
+        return database.rawQuery("""
+            SELECT
+                a.word as analogyWord,
+                a.translate as analogyTranslate
+            FROM analogies a
+            INNER JOIN morphemes m ON a.morpheme_id = m.id
+            INNER JOIN morpheme_math_term mmt ON m.id = mmt.morpheme_id
+            WHERE mmt.math_term_id = ?
+            ORDER BY a.id ASC
+        """, arrayOf(termId.toString()))
+    }
+
     fun getMathTermById(termId: Int):Cursor{
         return database.query(
             DBHelper.TABLE_MATH_TERMS,
@@ -65,29 +78,19 @@ class DBManager(context: Context) {
         )
     }
 
-    fun getLinkTypeById(linkTypeId: Int): Cursor {
+    fun getMathTermsForList(): Cursor{
         return database.query(
-            DBHelper.TABLE_LINK_TYPES,
-            null,
-            "${DBHelper.COL_ID_LINK_TYPE} = ?",
-            arrayOf(linkTypeId.toString()),
+            DBHelper.TABLE_MATH_TERMS,
+            arrayOf("id", "term", "translate"),
             null,
             null,
-            null
+            null,
+            null,
+            "${DBHelper.COL_ID_MATH_TERM} ASC"
         )
     }
 
-    fun getAllLinkTypes(): Cursor{
-        return database.query(
-            DBHelper.TABLE_LINK_TYPES,
-            null,
-            null,
-            null,
-            null,
-            null,
-            "${DBHelper.COL_ID_LINK_TYPE} ASC"
-        )
-    }
+
 
 
     fun authenticate(login: String,pass: String): Cursor{
