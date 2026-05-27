@@ -20,11 +20,7 @@ class MainMenuActivity : AppCompatActivity() {
 
         dbManager = DBManager(this)
 
-        val buttonContinue: Button = findViewById(R.id.btn_continue)
-        buttonContinue.setOnClickListener {
-            val intent = Intent(this, TermDetailActivity::class.java)
-            startActivity(intent)
-        }
+
 
         val btnAllTerms: Button = findViewById(R.id.btn_choose_menu)
         btnAllTerms.setOnClickListener {

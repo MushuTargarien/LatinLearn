@@ -56,7 +56,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
 
 
         const val DATABASE_NAME = "latin_learn3"
-        const val DATABASE_VERSION = 2
+        const val DATABASE_VERSION = 4
         private const val DB_PATH_SUFFIX = "/databases/"
         private var instance: DBHelper? = null
 
@@ -105,7 +105,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null
     }
     override fun onCreate(db: SQLiteDatabase?) = Unit
 
-    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) = Unit
+    override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {}
 
     fun getReadableDatabases(): SQLiteDatabase {
         return  super.getReadableDatabase()

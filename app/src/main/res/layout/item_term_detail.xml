@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="8dp"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="8dp"
+    app:cardCornerRadius="18dp"
+    app:cardElevation="6dp"
     app:strokeWidth="2dp"
-    app:strokeColor="#d4a34a"
+    app:strokeColor="#D4A34A"
     app:cardBackgroundColor="@color/Background">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp">
-
+        android:padding="16dp">
 
         <TextView
             android:id="@+id/analogyWordText"
@@ -25,81 +24,111 @@
             android:ellipsize="end"
             android:gravity="center"
             android:maxLines="1"
-            android:text="Bicycle - Велосипед"
-            android:textColor="#000000"
-            android:textSize="22sp"
+            android:text="Bicycle — Велосипед"
+            android:textColor="#241B14"
+            android:textSize="21sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:adjustViewBounds="true"
-            android:contentDescription="Иллюстрация"
-            android:scaleType="fitCenter"
-            android:src="@drawable/bicycle"
-            app:layout_constraintBottom_toTopOf="@id/analogyDefinitionText"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/analogyWordText" />
-
         <TextView
             android:id="@+id/analogyDefinitionText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
             android:gravity="center"
-            android:maxLines="3"
+            android:lineSpacingExtra="3dp"
+            android:minHeight="52dp"
+            android:paddingStart="12dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="10dp"
             android:text="двухколёсное транспортное средство"
-            android:textSize="18sp"
-
+            android:textColor="#33281B"
+            android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imageView" />
+            app:layout_constraintTop_toBottomOf="@+id/analogyWordText" />
 
-
-        <View
-            android:id="@+id/divider3"
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginTop="16dp"
-            android:background="#e6b855"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/analogyDefinitionText" />
-
-        <TextView
-            android:id="@+id/morphemeFormText"
+        <LinearLayout
+            android:id="@+id/morphemeBlock"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="bi-"
-            android:textColor="#e6b855"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/bg_morpheme_block"
             android:gravity="center"
+            android:orientation="vertical"
+            android:paddingStart="14dp"
+            android:paddingTop="14dp"
+            android:paddingEnd="14dp"
+            android:paddingBottom="14dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/divider3" />
+            app:layout_constraintTop_toBottomOf="@id/analogyDefinitionText">
+
+            <TextView
+                android:id="@+id/morphemeLabelText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="морфема"
+                android:textColor="#8A6735"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/morphemeFormText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="bi-"
+                android:textColor="#B97600"
+                android:textSize="38sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/morphemeMeaningText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="«два»"
+                android:textColor="#4D3A22"
+                android:textSize="16sp" />
+
+
+
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/morphemeMeaningText"
+            android:id="@+id/morphemeExplanationText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:text="означает «два»"
-            android:textColor="#666666"
-            android:textSize="14sp"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/bg_explanation_block"
             android:gravity="center"
+            android:lineSpacingExtra="4dp"
+            android:paddingStart="14dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="14dp"
+            android:paddingBottom="12dp"
+            android:text="В слове bicycle морфема bi- связана с идеей «два»: у велосипеда два колеса."
+            android:textColor="#33281B"
+            android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/morphemeFormText" />
+            app:layout_constraintTop_toBottomOf="@id/morphemeBlock" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="346dp"
+            android:layout_height="131dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="Иллюстрация слова-аналогии"
+            android:scaleType="fitCenter"
+            android:src="@drawable/bicycle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/morphemeExplanationText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>
