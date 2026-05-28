@@ -17,7 +17,7 @@ class ExpandableTermAdapter (
     private val onDetailsClick: (Int) -> Unit
 ): RecyclerView.Adapter<ExpandableTermAdapter.TermViewHolder>() {
 
-
+    private val expandedTermId = mutableSetOf<Int>()
     private val expandedPositions = mutableSetOf<Int>()
 
 
@@ -29,54 +29,65 @@ class ExpandableTermAdapter (
 
     override fun onBindViewHolder(holder: TermViewHolder, position: Int) {
         val term = terms[position]
+        val isExpanded = expandedTermId.contains(term.termId)
 
         holder.termText.text = "${term.term} - ${term.translate}"
 
         holder.expandIcon.setImageResource(
-            if (expandedPositions.contains(position))
-                android.R.drawable.arrow_up_float
-            else
-                android.R.drawable.arrow_down_float
+            if (isExpanded) android.R.drawable.arrow_up_float
+            else android.R.drawable.arrow_down_float
         )
 
         holder.expandIcon.setOnClickListener {
-            toggleExpansion(position)
+            toggleExpansion(term.termId)
         }
 
         holder.termText.setOnClickListener {
-            toggleExpansion(position)
+            toggleExpansion(term.termId)
         }
 
         holder.detailsButton.setOnClickListener {
             onDetailsClick(term.termId)
         }
 
-        if (expandedPositions.contains(position)) {
-            holder.analogiesContainer.visibility = View.VISIBLE
-            holder.analogiesContainer.removeAllViews()
+        holder.analogiesContainer.removeAllViews()
 
-            for (analogy in term.analogies) {
-                val analogyView = LayoutInflater.from(holder.itemView.context)
-                    .inflate(R.layout.item_analogy, holder.analogiesContainer, false)
-                val analogyText = analogyView.findViewById<TextView>(R.id.analogyText)
-                analogyText.text = "• ${analogy.word} - ${analogy.translate}"
-                holder.analogiesContainer.addView(analogyView)
+        if (isExpanded) {
+            holder.analogiesContainer.visibility = View.VISIBLE
+
+            if (term.analogies.isEmpty()) {
+                val emptyText = TextView(holder.itemView.context)
+                emptyText.text = "Нет аналогий для этого режима"
+                holder.analogiesContainer.addView(emptyText)
+            } else {
+                for (analogy in term.analogies) {
+                    val analogyView = LayoutInflater.from(holder.itemView.context)
+                        .inflate(R.layout.item_analogy, holder.analogiesContainer, false)
+                    val analogyText = analogyView.findViewById<TextView>(R.id.analogyText)
+                    analogyText.text = "• ${analogy.word} - ${analogy.translate}"
+                    holder.analogiesContainer.addView(analogyView)
+                }
             }
         } else {
             holder.analogiesContainer.visibility = View.GONE
-            holder.analogiesContainer.removeAllViews()
         }
-
     }
+
 
     override fun getItemCount() = terms.size
 
     private fun toggleExpansion(termIndex: Int) {
-        if (expandedPositions.contains(termIndex)) {
-            expandedPositions.remove(termIndex)
+        if (expandedTermId.contains(termIndex)) {
+            expandedTermId.remove(termIndex)
         } else {
-            expandedPositions.add(termIndex)
+            expandedTermId.add(termIndex)
         }
+        notifyDataSetChanged()
+    }
+
+
+    fun updateData(newTerms: List<MathTermWithAnalogies>) {
+        terms = newTerms.toMutableList()
         notifyDataSetChanged()
     }
 
@@ -85,12 +96,5 @@ class ExpandableTermAdapter (
         val expandIcon: ImageView = view.findViewById(R.id.expandIcon)
         val detailsButton: Button = view.findViewById(R.id.detailsButton)
         val analogiesContainer: LinearLayout = view.findViewById(R.id.analogiesContainer)
-    }
-
-
-    fun updateData(newTerms: List<MathTermWithAnalogies>) {
-        expandedPositions.clear()
-        terms = newTerms.toMutableList()
-        notifyDataSetChanged()
     }
 }

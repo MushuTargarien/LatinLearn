@@ -19,8 +19,12 @@ class TermDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_term_detail)
 
         val termId = intent.getIntExtra("TERM_ID",1)
+
+        val analogyMode = AnalogyMode.valueOf(
+            intent.getStringExtra("ANALOGY_MODE") ?: AnalogyMode.LIFE.name
+        )
         repository = TermWithAnalogyRepository(this)
-        val analogies = repository.getAnalogiesForTerm(termId)
+        val analogies = repository.getAnalogiesForTerm(termId, analogyMode)
 
         val cardsViewPager : ViewPager2 = findViewById(R.id.cardsViewPager)
         val dotsIndicator : DotsIndicator = findViewById(R.id.dotsIndicator)

@@ -17,7 +17,7 @@ class DBManager(context: Context) {
 
 
 
-    fun getAnalogiesForTerm(termId: Int): Cursor{
+    fun getAnalogiesForTerm(termId: Int, mode: AnalogyMode): Cursor{
         return database.rawQuery("""
             SELECT
                 mt.id as termId,
@@ -37,11 +37,12 @@ class DBManager(context: Context) {
             INNER JOIN morphemes m ON mmt.morpheme_id = m.id
             INNER JOIN analogies a ON m.id = a.morpheme_id 
             WHERE mt.id = ?
+            AND a.is_math_analogy = ?
             ORDER BY a.id ASC
-        """, arrayOf(termId.toString()))
+        """, arrayOf(termId.toString(),if (mode.isMathAnalogy) "1" else "0"))
     }
 
-    fun getAnalogiesForList(termId: Int): Cursor{
+    fun getAnalogiesForList(termId: Int, mode: AnalogyMode): Cursor{
         return database.rawQuery("""
             SELECT
                 a.word as analogyWord,
@@ -50,8 +51,9 @@ class DBManager(context: Context) {
             INNER JOIN morphemes m ON a.morpheme_id = m.id
             INNER JOIN morpheme_math_term mmt ON m.id = mmt.morpheme_id
             WHERE mmt.math_term_id = ?
+            AND a.is_math_analogy = ?
             ORDER BY a.id ASC
-        """, arrayOf(termId.toString()))
+        """, arrayOf(termId.toString(),if (mode.isMathAnalogy) "1" else "0"))
     }
 
     fun getMathTermById(termId: Int):Cursor{

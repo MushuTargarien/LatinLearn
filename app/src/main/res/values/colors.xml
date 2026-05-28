@@ -3,4 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="Background">#ffd391</color>
+    <color name="CardBackground">#FFF2D6</color>
+    <color name="AnalogyBackground">#FFE7B8</color>
+    <color name="MutedText">#5F4A2A</color>
 </resources>

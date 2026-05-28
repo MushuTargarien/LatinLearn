@@ -5,7 +5,7 @@ import android.content.Context
 class MathTermRepository(private val context: Context) {
     private val dbManager by lazy { DBManager(context) }
 
-    fun getAllTermWithAnalogies(): List<MathTermWithAnalogies> {
+    fun getAllTermWithAnalogies(mode: AnalogyMode): List<MathTermWithAnalogies> {
         val terms = mutableListOf<MathTermWithAnalogies>()
         val cursor = dbManager.getMathTermsForList()
 
@@ -14,7 +14,7 @@ class MathTermRepository(private val context: Context) {
                 val termId = cursor.getInt(cursor.getColumnIndexOrThrow("id"))
                 val term = cursor.getString(cursor.getColumnIndexOrThrow("term")).orEmpty()
                 val translate = cursor.getString(cursor.getColumnIndexOrThrow("translate")).orEmpty()
-                val analogies = getAnalogiesForTerm(termId)
+                val analogies = getAnalogiesForTerm(termId, mode)
 
                 terms.add(MathTermWithAnalogies(
                     termId = termId,
@@ -30,9 +30,9 @@ class MathTermRepository(private val context: Context) {
     }
 
 
-    private fun getAnalogiesForTerm(termId: Int): List<AnalogyItem> {
+    private fun getAnalogiesForTerm(termId: Int, mode: AnalogyMode): List<AnalogyItem> {
         val analogies = mutableListOf<AnalogyItem>()
-        val cursor = dbManager.getAnalogiesForList(termId)
+        val cursor = dbManager.getAnalogiesForList(termId, mode)
 
         if(cursor.moveToFirst()) {
             do {

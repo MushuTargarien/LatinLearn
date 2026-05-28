@@ -5,27 +5,28 @@ import android.content.Context
 class TermWithAnalogyRepository(private val context: Context){
     private val dbManager by lazy { DBManager(context) }
 
-    fun getAnalogiesForTerm(termId: Int): List<TermWithAnalogy>{
+    fun getAnalogiesForTerm(termId: Int, mode: AnalogyMode): List<TermWithAnalogy>{
         val analogies = mutableListOf<TermWithAnalogy>()
-        val cursor = dbManager.getAnalogiesForTerm(termId)
+        val cursor = dbManager.getAnalogiesForTerm(termId, mode)
 
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             do {
-                val termWithAnalogy = TermWithAnalogy(
-                    termId = cursor.getInt(cursor.getColumnIndexOrThrow("termId")),
-                    term = cursor.getString(cursor.getColumnIndexOrThrow("term")),
-                    termTranslate = cursor.getString(cursor.getColumnIndexOrThrow("termTranslate")),
-                    definition = cursor.getString(cursor.getColumnIndexOrThrow("definition")),
-                    analogyWord = cursor.getString(cursor.getColumnIndexOrThrow("analogyWord")),
-                    analogyTranslate = cursor.getString(cursor.getColumnIndexOrThrow("analogyTranslate")),
-                    analogyDefinition = cursor.getString(cursor.getColumnIndexOrThrow("analogyDefinition")),
-                    imageUrl = cursor.getString(cursor.getColumnIndexOrThrow("imageUrl")) ?: "",
-                    morphemeForm = cursor.getString(cursor.getColumnIndexOrThrow("morphemeForm")),
-                    morphemeType = cursor.getString(cursor.getColumnIndexOrThrow("morphemeType")),
-                    morphemeMeaning = cursor.getString(cursor.getColumnIndexOrThrow("morphemeMeaning")),
-                    morphemeExplanation = cursor.getString(cursor.getColumnIndexOrThrow("morphemeExplanation"))
+                analogies.add(
+                    TermWithAnalogy(
+                        termId = cursor.getInt(cursor.getColumnIndexOrThrow("termId")),
+                        term = cursor.getString(cursor.getColumnIndexOrThrow("term")),
+                        termTranslate = cursor.getString(cursor.getColumnIndexOrThrow("termTranslate")),
+                        definition = cursor.getString(cursor.getColumnIndexOrThrow("definition")),
+                        analogyWord = cursor.getString(cursor.getColumnIndexOrThrow("analogyWord")),
+                        analogyTranslate = cursor.getString(cursor.getColumnIndexOrThrow("analogyTranslate")),
+                        analogyDefinition = cursor.getString(cursor.getColumnIndexOrThrow("analogyDefinition")),
+                        imageUrl = cursor.getString(cursor.getColumnIndexOrThrow("imageUrl")) ?: "",
+                        morphemeForm = cursor.getString(cursor.getColumnIndexOrThrow("morphemeForm")),
+                        morphemeType = cursor.getString(cursor.getColumnIndexOrThrow("morphemeType")),
+                        morphemeMeaning = cursor.getString(cursor.getColumnIndexOrThrow("morphemeMeaning")),
+                        morphemeExplanation = cursor.getString(cursor.getColumnIndexOrThrow("morphemeExplanation"))
+                    )
                 )
-                analogies.add(termWithAnalogy)
             } while (cursor.moveToNext())
         }
         cursor.close()
