@@ -71,7 +71,7 @@
         android:id="@+id/btn_from_term_actvt_to_mainmenu"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/button_outline_selector"
         android:text="вернуться"
         android:textColor="@color/black"

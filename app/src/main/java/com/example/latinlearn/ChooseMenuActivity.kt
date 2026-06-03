@@ -24,7 +24,6 @@ class ChooseMenuActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_choose_menu)
 
         recyclerView = findViewById(R.id.termsRecyclerView)

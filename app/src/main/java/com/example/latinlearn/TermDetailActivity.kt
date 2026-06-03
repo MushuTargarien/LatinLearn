@@ -15,7 +15,6 @@ class TermDetailActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_term_detail)
 
         val termId = intent.getIntExtra("TERM_ID",1)

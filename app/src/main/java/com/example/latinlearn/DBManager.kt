@@ -28,10 +28,10 @@ class DBManager(context: Context) {
                 a.translate as analogyTranslate,
                 a.definition as analogyDefinition,
                 a.image_url as imageUrl,
+                a.explanation as morphemeExplanation,
                 m.form as morphemeForm,
                 m.type as morphemeType,
-                m.meaning as morphemeMeaning,
-                mmt.explanation as morphemeExplanation
+                m.meaning as morphemeMeaning
             FROM math_terms mt
             INNER JOIN morpheme_math_term mmt ON mt.id = mmt.math_term_id
             INNER JOIN morphemes m ON mmt.morpheme_id = m.id
@@ -46,7 +46,8 @@ class DBManager(context: Context) {
         return database.rawQuery("""
             SELECT
                 a.word as analogyWord,
-                a.translate as analogyTranslate
+                a.translate as analogyTranslate,
+                m.form as morphemeForm
             FROM analogies a
             INNER JOIN morphemes m ON a.morpheme_id = m.id
             INNER JOIN morpheme_math_term mmt ON m.id = mmt.morpheme_id
@@ -56,17 +57,7 @@ class DBManager(context: Context) {
         """, arrayOf(termId.toString(),if (mode.isMathAnalogy) "1" else "0"))
     }
 
-    fun getMathTermById(termId: Int):Cursor{
-        return database.query(
-            DBHelper.TABLE_MATH_TERMS,
-            null,
-            "${DBHelper.COL_ID_MATH_TERM} = ?",
-            arrayOf(termId.toString()),
-            null,
-            null,
-            null
-        )
-    }
+
 
     fun getAllMathTerms(): Cursor{
         return database.query(

@@ -1,5 +1,9 @@
 package com.example.latinlearn
 
+import android.graphics.Typeface
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,10 +11,9 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.constraintlayout.motion.widget.KeyPosition
+import java.util.Locale
 import androidx.recyclerview.widget.RecyclerView
-import okhttp3.internal.notify
-import kotlin.math.PI
+
 
 class ExpandableTermAdapter (
     private var terms: MutableList<MathTermWithAnalogies>,
@@ -18,7 +21,6 @@ class ExpandableTermAdapter (
 ): RecyclerView.Adapter<ExpandableTermAdapter.TermViewHolder>() {
 
     private val expandedTermId = mutableSetOf<Int>()
-    private val expandedPositions = mutableSetOf<Int>()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TermViewHolder {
@@ -34,8 +36,8 @@ class ExpandableTermAdapter (
         holder.termText.text = "${term.term} - ${term.translate}"
 
         holder.expandIcon.setImageResource(
-            if (isExpanded) android.R.drawable.arrow_up_float
-            else android.R.drawable.arrow_down_float
+            if (isExpanded) R.drawable.up
+            else R.drawable.down
         )
 
         holder.expandIcon.setOnClickListener {
@@ -64,15 +66,47 @@ class ExpandableTermAdapter (
                     val analogyView = LayoutInflater.from(holder.itemView.context)
                         .inflate(R.layout.item_analogy, holder.analogiesContainer, false)
                     val analogyText = analogyView.findViewById<TextView>(R.id.analogyText)
-                    analogyText.text = "• ${analogy.word} - ${analogy.translate}"
+                    analogyText.text = makeAnalogyText(analogy)
                     holder.analogiesContainer.addView(analogyView)
                 }
             }
         } else {
             holder.analogiesContainer.visibility = View.GONE
         }
+
+
     }
 
+    private fun makeAnalogyText(analogy: AnalogyItem): SpannableString {
+        val text = "• ${analogy.word} - ${analogy.translate}"
+        val spannable = SpannableString(text)
+
+        val morphemeForms = analogy.morphemeForm.split("/").map { it.replace("-", "").trim()}.filter { it.isNotEmpty() }.sortedByDescending { it.length }
+
+
+        val wordStartIndex = text.indexOf(analogy.word)
+        if ( wordStartIndex == -1){ return  spannable}
+
+        val lowerWord = analogy.word.lowercase(Locale.ROOT)
+
+        for (form in morphemeForms) {
+            val morphemeIndexInWord = lowerWord.indexOf(form.lowercase(Locale.ROOT))
+            if (wordStartIndex != -1 && morphemeIndexInWord != -1){
+                val start = wordStartIndex + morphemeIndexInWord
+                val end = start + form.length
+
+                spannable.setSpan(
+                    StyleSpan(Typeface.BOLD),
+                    start,
+                    end,
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+
+                break
+            }
+        }
+        return  spannable
+    }
 
     override fun getItemCount() = terms.size
 
@@ -84,6 +118,8 @@ class ExpandableTermAdapter (
         }
         notifyDataSetChanged()
     }
+
+
 
 
     fun updateData(newTerms: List<MathTermWithAnalogies>) {

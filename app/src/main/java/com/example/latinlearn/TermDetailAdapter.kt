@@ -25,6 +25,7 @@ class TermDetailAdapter (
         val morphemeFormText: TextView = view.findViewById(R.id.morphemeFormText)
         val morphemeMeaningText: TextView = view.findViewById(R.id.morphemeMeaningText)
         val morphemeExplanation: TextView = view.findViewById(R.id.morphemeExplanationText)
+        val morphemeType: TextView = view.findViewById(R.id.morphemeLabelText)
 
     }
 
@@ -43,6 +44,7 @@ class TermDetailAdapter (
         holder.morphemeMeaningText.text = "означает ${analogy.morphemeMeaning}"
         holder.analogyDefinitionText.text = analogy.analogyDefinition
         holder.morphemeExplanation.text = analogy.morphemeExplanation
+        holder.morphemeType.text = analogy.morphemeType
 
 
         holder.imageView.load(analogy.imageUrl) {

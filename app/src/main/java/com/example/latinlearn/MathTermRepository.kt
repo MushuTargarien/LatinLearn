@@ -38,7 +38,8 @@ class MathTermRepository(private val context: Context) {
             do {
                 analogies.add(AnalogyItem(
                     word = cursor.getString(cursor.getColumnIndexOrThrow("analogyWord")).orEmpty(),
-                    translate = cursor.getString(cursor.getColumnIndexOrThrow("analogyTranslate")).orEmpty()
+                    translate = cursor.getString(cursor.getColumnIndexOrThrow("analogyTranslate")).orEmpty(),
+                    morphemeForm = cursor.getString(cursor.getColumnIndexOrThrow("morphemeForm")).orEmpty()
                 ))
             } while (cursor.moveToNext())
         }

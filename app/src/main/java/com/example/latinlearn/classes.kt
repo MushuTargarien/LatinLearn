@@ -48,5 +48,6 @@ data class MathTermWithAnalogies(
 
 data class AnalogyItem(
     val word: String,
-    val translate: String
+    val translate: String,
+    val morphemeForm: String
 )
